@@ -65,17 +65,17 @@ module "enterprise_scale" {
   }
 }
 
-data "azurerm_management_group" "source" {
-  name = "app1"
-}
+# data "azurerm_management_group" "source" {
+#   name = "app1"
+# }
 
 # data "azurerm_management_group" "target" {
 #   name = "Platform"
 # }
 
-output "subscription" {
-  value = data.azurerm_management_group.source.all_subscription_ids
-}
+# output "subscription" {
+#   value = data.azurerm_management_group.source.all_subscription_ids
+# }
 
 # output "subscription" {
 #   value = data.azurerm_management_group.target.all_subscription_ids
