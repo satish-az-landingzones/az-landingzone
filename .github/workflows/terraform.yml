@@ -85,11 +85,11 @@ jobs:
     # Log in to Azure
     - name: Login to Azure
       uses: azure/login@v2
-      allow-no-subscriptions: true
       with:
         client-id: ${{ secrets.ARM_CLIENT_ID }}
         tenant-id: ${{ secrets.ARM_TENANT_ID }}
         subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        allow-no-subscriptions: true
     
     - name: Azure CLI script
       uses: azure/CLI@v1
