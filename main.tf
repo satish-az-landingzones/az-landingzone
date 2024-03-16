@@ -19,6 +19,7 @@ terraform {
 
 provider "azurerm" {
   features {}
+  tenant_id = "4af0ab13-4255-4a00-9f28-95ec4d87ed1a"
 }
 
 # Get the current client configuration from the AzureRM provider.
