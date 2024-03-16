@@ -81,6 +81,18 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check
 
+    # Log in to Azure
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.ARM_CLIENT_ID }}
+        tenant-id: ${{ secrets.ARM_TENANT_ID }}
+        subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+    
+    # Set Azure subscription
+    - name: Set Azure Subscription
+      run: az account set --subscription ${{ secrets.ARM_SUBSCRIPTION_ID }}
+    
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
