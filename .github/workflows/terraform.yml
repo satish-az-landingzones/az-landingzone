@@ -52,12 +52,12 @@ permissions:
   id-token: write
   contents: write
 
+
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: Dev
-
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -101,7 +101,7 @@ jobs:
     # Set Azure subscription
     - name: Set Azure Subscription
       run: az account set --subscription ${{ secrets.ARM_SUBSCRIPTION_ID }}
-    
+
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
