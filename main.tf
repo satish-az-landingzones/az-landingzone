@@ -2,13 +2,13 @@
 # version and features{} block.
 
 terraform {
-  # cloud {
-  #   organization = "tf-az-landingzone"
+  cloud {
+    organization = "tf-az-landingzone"
 
-  #   workspaces {
-  #     name = "tf-workspace-az-landingzone"
-  #   }
-  # }
+    workspaces {
+      name = "tf-workspace-az-lz"
+    }
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
