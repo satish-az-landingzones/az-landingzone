@@ -54,7 +54,7 @@ module "enterprise_scale" {
     "app1" = {
       display_name               = "app1"
       parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = ["09eb89bf-2bc2-47fd-a1c4-1eb8124e95a0"]
+      subscription_ids           = ["42caed1c-6b6c-4e8d-9779-75b1eeba6ab4"]
       archetype_config = {
         archetype_id   = "customer_online"
         parameters     = {}
