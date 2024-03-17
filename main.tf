@@ -2,13 +2,13 @@
 # version and features{} block.
 
 terraform {
-  # cloud {
-  #   organization = "tf-az-landingzone"
+  cloud {
+    organization = "tf-az-landingzone"
 
-  #   workspaces {
-  #     name = "tf-workspace-az-landingzone"
-  #   }
-  # }
+    workspaces {
+      name = "tf-workspace-az-lz"
+    }
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -19,7 +19,6 @@ terraform {
 
 provider "azurerm" {
   features {}
-  tenant_id = "4af0ab13-4255-4a00-9f28-95ec4d87ed1a"
 }
 
 # Get the current client configuration from the AzureRM provider.
@@ -55,7 +54,7 @@ module "enterprise_scale" {
     "app1" = {
       display_name               = "app1"
       parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
+      subscription_ids           = ["09eb89bf-2bc2-47fd-a1c4-1eb8124e95a0"]
       archetype_config = {
         archetype_id   = "customer_online"
         parameters     = {}
@@ -64,19 +63,3 @@ module "enterprise_scale" {
     }
   }
 }
-
-# data "azurerm_management_group" "source" {
-#   name = "app1"
-# }
-
-# data "azurerm_management_group" "target" {
-#   name = "Platform"
-# }
-
-# output "subscription" {
-#   value = data.azurerm_management_group.source.all_subscription_ids
-# }
-
-# output "subscription" {
-#   value = data.azurerm_management_group.target.all_subscription_ids
-# }
