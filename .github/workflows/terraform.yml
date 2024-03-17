@@ -91,17 +91,6 @@ jobs:
         subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
     
 
-    - name: Azure CLI script
-      uses: azure/CLI@v1
-      with:
-        azcliversion: latest
-        inlineScript: |
-          az account show
-    
-    # Set Azure subscription
-    - name: Set Azure Subscription
-      run: az account set --subscription ${{ secrets.ARM_SUBSCRIPTION_ID }}
-
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
