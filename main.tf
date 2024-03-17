@@ -55,7 +55,7 @@ module "enterprise_scale" {
     "app1" = {
       display_name               = "app1"
       parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
+      subscription_ids           = ["09eb89bf-2bc2-47fd-a1c4-1eb8124e95a0"]
       archetype_config = {
         archetype_id   = "customer_online"
         parameters     = {}
@@ -64,19 +64,3 @@ module "enterprise_scale" {
     }
   }
 }
-
-# data "azurerm_management_group" "source" {
-#   name = "app1"
-# }
-
-# data "azurerm_management_group" "target" {
-#   name = "Platform"
-# }
-
-# output "subscription" {
-#   value = data.azurerm_management_group.source.all_subscription_ids
-# }
-
-# output "subscription" {
-#   value = data.azurerm_management_group.target.all_subscription_ids
-# }
