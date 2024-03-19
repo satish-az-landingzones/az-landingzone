@@ -14,3 +14,7 @@ variable "default_location" {
   type    = string
   default = "eastus"
 }
+
+variable "subscription_billing_scope" {}
+variable "subscriptions" {}
+variable "subscription_workload" {}
