@@ -15,6 +15,13 @@ variable "default_location" {
   default = "eastus"
 }
 
-variable "subscription_billing_scope" {}
-variable "subscriptions" {}
-variable "subscription_workload" {}
+
+variable "subscriptions" {
+  type = list(object({
+    subscription_alias_name   = string
+    subscription_display_name = string
+    subscription_workload     = string
+    subscription_management_group_id       = string
+    subscription_billing_scope = string
+  }))
+}
