@@ -56,9 +56,9 @@ resource "azurerm_subscription" "hub" {
 
 # Grant Contributor access at subscription level
 resource "azurerm_role_assignment" "contributor_assignment" {
-  scope                = "/subscriptions/${resource.azurerm_subscription.hub.subscription_id}"  # Replace with the subscription ID
+  scope                = "/subscriptions/${resource.azurerm_subscription.hub.subscription_id}" # Replace with the subscription ID
   role_definition_name = "Contributor"
-  principal_id         = "${resource.azurerm_application.github_subscription_creation.object_id}"
+  principal_id         = resource.azurerm_application.github_subscription_creation.object_id
 }
 
 output "client_id" {
@@ -66,7 +66,7 @@ output "client_id" {
 }
 
 output "subscription_id" {
-  value = "${resource.azurerm_subscription.hub.subscription_id}"  # Replace with the subscription ID
+  value = resource.azurerm_subscription.hub.subscription_id # Replace with the subscription ID
 }
 
 output "tenant_id" {
