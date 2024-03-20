@@ -90,7 +90,7 @@ jobs:
       run: |
         echo "current directory is:"
         pwd
-        ls -lrt
+        ls -lRt
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -107,4 +107,4 @@ jobs:
 
     - name: Terraform Apply
       # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      run: terraform apply -auto-approve tfplan
+      run: terraform apply -auto-approve tfplan/tfplan
