@@ -80,10 +80,10 @@ jobs:
         subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
     - name: Check current working directory
-        run: |
-          echo "current directory is:"
-          pwd
-          ls -lrt
+      run: |
+        echo "current directory is:"
+        pwd
+        ls -lrt
     - name: Download plan file
       uses: actions/download-artifact@v2
       with:
