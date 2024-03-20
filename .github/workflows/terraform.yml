@@ -50,6 +50,11 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false -out=tfplan
 
+    - name: Save plan file
+      uses: actions/upload-artifact@v2
+      with:
+        name: tfplan
+        path: tfplan
 
   terraform-apply:
     name: 'Terraform Apply'
@@ -74,6 +79,12 @@ jobs:
         tenant-id: ${{ secrets.ARM_TENANT_ID }}
         subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
+    - name: Download plan file
+      uses: actions/download-artifact@v2
+      with:
+        name: tfplan
+        path: tfplan
+        
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
