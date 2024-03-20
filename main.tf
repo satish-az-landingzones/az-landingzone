@@ -1,26 +1,3 @@
-# Configure Terraform to set the required AzureRM provider
-# version and features{} block.
-
-terraform {
-  cloud {
-    organization = "tf-az-landingzone"
-
-    workspaces {
-      name = "tf-workspace-az-lz"
-    }
-  }
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = ">= 3.74.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  features {}
-}
-
 # Get the current client configuration from the AzureRM provider.
 # This is used to populate the root_parent_id variable with the
 # current Tenant ID used as the ID for the "Tenant Root Group"
