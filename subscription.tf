@@ -27,7 +27,7 @@ data "azurerm_billing_mca_account_scope" "hub" {
 }
 
 resource "azurerm_subscription" "hub" {
-  subscription_name = "Hub Subscription 2"
+  subscription_name = "Hub Subscription 3"
   billing_scope_id  = data.azurerm_billing_mca_account_scope.hub.id
 }
 
