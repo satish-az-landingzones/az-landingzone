@@ -1,29 +1,7 @@
-# module "lz_vending" {
-#   source  = "Azure/lz-vending/azurerm"
-#   version = "4.0.2" # change this to your desired version, https://www.terraform.io/language/expressions/version-constraints
-
-#   # Set the default location for resources
-#   location = var.default_location
-
-#   for_each = { for sub in var.subscriptions : sub.subscription_alias_name => sub }
-#   # subscription variables
-#   subscription_alias_enabled = true
-#   subscription_alias_name    = each.value.subscription_alias_name
-#   subscription_display_name  = each.value.subscription_display_name
-#   subscription_billing_scope = each.value.subscription_billing_scope
-#   subscription_workload      = each.value.subscription_workload
-
-#   subscription_management_group_id                  = each.value.subscription_management_group_id
-#   subscription_management_group_association_enabled = true
-# }
-
-###################################################################################################################
-
 # Create an app registration
 resource "azuread_application_registration" "hub" {
   display_name = "GitHub Terraform - Hub Creation"
 }
-
 
 resource "azuread_application_federated_identity_credential" "hub" {
   application_id = azuread_application_registration.hub.id
@@ -58,7 +36,7 @@ resource "azurerm_subscription" "hub" {
 resource "azurerm_role_assignment" "contributor_assignment" {
   scope                = "/subscriptions/${resource.azurerm_subscription.hub.subscription_id}" # Replace with the subscription ID
   role_definition_name = "Contributor"
-  principal_id         = resource.azurerm_application.github_subscription_creation.object_id
+  principal_id         = azuread_application_registration.hub.object_id
 }
 
 output "client_id" {
@@ -66,7 +44,7 @@ output "client_id" {
 }
 
 output "subscription_id" {
-  value = resource.azurerm_subscription.hub.subscription_id # Replace with the subscription ID
+  value = azurerm_subscription.hub.subscription_id # Replace with the subscription ID
 }
 
 output "tenant_id" {
