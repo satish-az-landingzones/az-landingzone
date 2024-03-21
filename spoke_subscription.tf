@@ -29,6 +29,12 @@ data "azurerm_billing_mca_account_scope" "spoke" {
 resource "azurerm_subscription" "spoke" {
   subscription_name = "Spoke Subscription"
   billing_scope_id  = data.azurerm_billing_mca_account_scope.spoke.id
+
+  timeouts {
+    create = "10m" # Timeout for resource creation (default is "5m")
+    update = "5m"  # Timeout for resource updates (default is "0", meaning no timeout)
+    delete = "15m" # Timeout for resource deletion (default is "5m")
+  }
 }
 
 
