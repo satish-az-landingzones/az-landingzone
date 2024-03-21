@@ -39,15 +39,10 @@ resource "azurerm_role_assignment" "contributor_assignment" {
   principal_id         = azuread_application_registration.hub.object_id
 }
 
-output "client_id" {
+output "hub_client_id" {
   value = azuread_application_registration.hub.client_id
 }
 
-output "subscription_id" {
+output "hub_subscription_id" {
   value = azurerm_subscription.hub.subscription_id # Replace with the subscription ID
 }
-
-output "tenant_id" {
-  value = data.azurerm_client_config.core.tenant_id
-}
-
