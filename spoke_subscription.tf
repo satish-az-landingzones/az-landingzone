@@ -33,7 +33,7 @@ resource "azurerm_subscription" "spoke" {
 
 
 # Grant Contributor access at subscription level
-resource "azurerm_role_assignment" "contributor_assignment" {
+resource "azurerm_role_assignment" "spoke_contributor_assignment" {
   scope                = "/subscriptions/${resource.azurerm_subscription.spoke.subscription_id}" # Replace with the subscription ID
   role_definition_name = "Contributor"
   principal_id         = azuread_application_registration.spoke.object_id
