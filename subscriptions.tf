@@ -18,7 +18,7 @@ module "lz_vending" {
 }
 
 data "azurerm_subscription" "output" {
-  for_each = module.lz_vending.subscription_display_names
+  for_each     = module.lz_vending.subscription_display_names
   display_name = each.key
 }
 
