@@ -19,13 +19,6 @@ resource "azuread_service_principal" "hub" {
   client_id = azuread_application_registration.hub.client_id
 }
 
-# Assign federation credential to GitHub organization and project
-# You'll need to use Azure CLI or PowerShell to perform this step as Terraform doesn't directly support GitHub organization and project assignments.
-
-data "azurerm_management_group" "hub" {
-  name = "app1"
-}
-
 # Grant Contributor access at subscription level
 resource "azurerm_role_assignment" "hub" {
   scope                = "/subscriptions/${var.hub_subscription}" # Replace with the subscription ID
