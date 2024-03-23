@@ -16,4 +16,4 @@ subscriptions = [
 ]
 
 spoke_subscription = "caa318eb-1d1b-4015-b096-195726de1378"
-hub_subscription = "56b22e13-1830-4b38-b369-319d290c3237"
+hub_subscription   = "56b22e13-1830-4b38-b369-319d290c3237"
