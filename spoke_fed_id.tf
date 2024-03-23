@@ -5,7 +5,7 @@ resource "azuread_application_registration" "spoke" {
 
 resource "azuread_application_federated_identity_credential" "spoke" {
   application_id = azuread_application_registration.spoke.id
-  display_name   = "GitHub Terraform - Spoke FedID"
+  display_name   = "GH-TF-Spoke-FedID"
   description    = "GitHub Deployments for Spoke using Terraform"
   audiences      = ["api://AzureADTokenExchange"]
   issuer         = "https://token.actions.githubusercontent.com"
