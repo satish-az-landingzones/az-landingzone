@@ -42,4 +42,3 @@ resource "azurerm_role_assignment" "spoke_contributor_assignment" {
 output "spoke_client_id" {
   value = azuread_application_registration.spoke.client_id
 }
-
