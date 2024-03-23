@@ -19,8 +19,14 @@ data "azurerm_management_group" "spoke" {
   name = "app1"
 }
 
-data "azurerm_subscription" "spoke" {
-  display_name = "spoke_subscription_01"
+data "azurerm_subscriptions" "all" {}
+
+data "azurerm_subscription" "spoke_subscription" {
+  for_each = { for sub in data.azurerm_subscriptions.all.subscriptions : sub.display_name => sub if sub.display_name == "spoke_subscription_01" }
+}
+
+output "spoke_subscription_id" {
+  value = data.azurerm_subscription.spoke_subscription["spoke_subscription_01"].subscription_id
 }
 
 
@@ -37,7 +43,7 @@ data "azurerm_subscription" "spoke" {
 
 # Grant Contributor access at subscription level
 resource "azurerm_role_assignment" "spoke_contributor_assignment" {
-  scope                = "/subscriptions/${data.azurerm_subscription.spoke.subscription_id}" # Replace with the subscription ID
+  scope                = "/subscriptions/${data.azurerm_subscription.spoke_subscription["spoke_subscription_01"].subscription_id}" # Replace with the subscription ID
   role_definition_name = "Contributor"
   principal_id         = azuread_application_registration.spoke.object_id
 }
