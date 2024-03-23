@@ -25,3 +25,7 @@ variable "subscriptions" {
     subscription_billing_scope       = string
   }))
 }
+
+variable "spoke_subscription" {
+  type = string
+}
