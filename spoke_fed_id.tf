@@ -14,7 +14,7 @@ resource "azuread_application_federated_identity_credential" "spoke" {
 
 
 resource "azurerm_azuread_service_principal" "spoke" {
-  application_id = "${azuread_application_registration.spoke.application_id}"
+  application_id = azuread_application_registration.spoke.application_id
 }
 
 
@@ -42,7 +42,7 @@ data "azurerm_management_group" "spoke" {
 resource "azurerm_role_assignment" "spoke_contributor_assignment" {
   scope                = "/subscriptions/${var.spoke_subscription}" # Replace with the subscription ID
   role_definition_name = "Contributor"
-  principal_id         = "${azurerm_azuread_service_principal.spoke.object_id}"
+  principal_id         = azurerm_azuread_service_principal.spoke.object_id
 }
 
 output "spoke_client_id" {
