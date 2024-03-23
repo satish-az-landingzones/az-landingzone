@@ -1,3 +1,6 @@
+## This will create app_registration for spoke, add feration identity, creates service principal and assigns contributor role
+
+
 # Create an app registration
 resource "azuread_application_registration" "spoke" {
   display_name = "GitHub Terraform - Spoke Creation"
@@ -14,7 +17,7 @@ resource "azuread_application_federated_identity_credential" "spoke" {
 
 
 resource "azuread_service_principal" "spoke" {
-  application_id = azuread_application_registration.spoke.application_id
+  client_id    = azuread_application_registration.spoke.client_id
 }
 
 
