@@ -17,14 +17,9 @@ module "lz_vending" {
   subscription_management_group_association_enabled = true
 }
 
-data "azurerm_subscription" "output" {
-  for_each     = module.lz_vending.subscription_display_names
-  display_name = each.key
-}
-
 output "subscription_ids" {
   value = {
-    for key, sub in data.azurerm_subscription.output : key => sub.subscription_id
+    for alias_name, sub_module in module.lz_vending : alias_name => sub_module.subscription_id
   }
 }
 ##################################################################################################################
