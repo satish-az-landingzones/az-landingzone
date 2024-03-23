@@ -29,3 +29,7 @@ variable "subscriptions" {
 variable "spoke_subscription" {
   type = string
 }
+
+variable "hub_subscription" {
+  type = string
+}
