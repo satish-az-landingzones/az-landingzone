@@ -33,11 +33,11 @@ data "azurerm_management_group" "spoke" {
 # }
 
 # Grant Contributor access at subscription level
-# resource "azurerm_role_assignment" "spoke_contributor_assignment" {
-#   scope                = "/subscriptions/${data.azurerm_subscription.spoke_subscription["spoke_subscription_01"].subscription_id}" # Replace with the subscription ID
-#   role_definition_name = "Contributor"
-#   principal_id         = azuread_application_registration.spoke.object_id
-# }
+resource "azurerm_role_assignment" "spoke_contributor_assignment" {
+  scope                = "/subscriptions/spoke_subscription_01}" # Replace with the subscription ID
+  role_definition_name = "Contributor"
+  principal_id         = azuread_application_registration.spoke.object_id
+}
 
 output "spoke_client_id" {
   value = azuread_application_registration.spoke.client_id
