@@ -12,6 +12,12 @@ resource "azuread_application_federated_identity_credential" "spoke" {
   subject        = "repo:satish-az-landingzones/az-landingzone:environment:Dev"
 }
 
+
+resource "azurerm_azuread_service_principal" "spoke" {
+  application_id = "${azuread_application_registration.spoke.application_id}"
+}
+
+
 # Assign federation credential to GitHub organization and project
 # You'll need to use Azure CLI or PowerShell to perform this step as Terraform doesn't directly support GitHub organization and project assignments.
 
@@ -36,7 +42,7 @@ data "azurerm_management_group" "spoke" {
 resource "azurerm_role_assignment" "spoke_contributor_assignment" {
   scope                = "/subscriptions/${var.spoke_subscription}" # Replace with the subscription ID
   role_definition_name = "Contributor"
-  principal_id         = azuread_application_registration.spoke.object_id
+  principal_id         = "${azurerm_azuread_service_principal.spoke.object_id}"
 }
 
 output "spoke_client_id" {
