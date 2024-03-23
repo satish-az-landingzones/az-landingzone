@@ -17,7 +17,7 @@ resource "azuread_application_federated_identity_credential" "spoke" {
 
 
 resource "azuread_service_principal" "spoke" {
-  client_id    = azuread_application_registration.spoke.client_id
+  client_id = azuread_application_registration.spoke.client_id
 }
 
 
