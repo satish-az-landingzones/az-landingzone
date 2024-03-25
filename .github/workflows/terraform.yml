@@ -129,7 +129,7 @@ jobs:
   terraform-apply:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
-    depends-on: terraform-plan
+    needs: terraform-plan
     environment: Dev
     defaults:
       run:
