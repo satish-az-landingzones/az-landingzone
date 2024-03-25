@@ -8,11 +8,12 @@ permissions:
   contents: write
 
 
+
 jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    # environment: Dev
+    environment: ${{ matrix.environment }}
     strategy:
       max-parallel: 1
       fail-fast: true
@@ -127,8 +128,8 @@ jobs:
         - name: Upload Artifact
           uses: actions/upload-artifact@v3.1.2
           with:
-            name: Dev-plan
-            path: Dev.plan
+            name: ${{ matrix.environment }}.plan
+            # path: ${{ matrix.environment }}.plan
             retention-days: 30
 
 
@@ -136,7 +137,13 @@ jobs:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
     needs: terraform-plan
-    environment: Dev
+    environment: ${{ matrix.environment }}
+    strategy:
+      max-parallel: 1
+      fail-fast: true
+      matrix:
+        environment:
+           - Dev
     defaults:
       run:
         shell: bash
@@ -174,13 +181,13 @@ jobs:
 
         - uses: actions/download-artifact@v3
           with:
-            name: ${{ inputs.terraform_environment }}-${{ inputs.tfplan_name_suffix }}
-            path: ${{ inputs.terraform_directory }}
+            name: ${{ matrix.environment }}.plan
+            # path: ${{ matrix.environment }}.plan
 
         - name: Terraform Apply
           id: apply
           run: |
-            terraform apply ${{ inputs.terraform_directory }}/${{ inputs.terraform_environment }}-${{ inputs.tfplan_name_suffix }}
+            terraform apply ${{ matrix.environment }}.plan
           continue-on-error: false
           # working-directory: terraform
 
