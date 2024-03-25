@@ -33,3 +33,5 @@ variable "spoke_subscription" {
 variable "hub_subscription" {
   type = string
 }
+
+variable github_token{}
