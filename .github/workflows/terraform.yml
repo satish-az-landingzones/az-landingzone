@@ -51,13 +51,13 @@ jobs:
         - name: Terraform Validate
           id: validate
           shell: bash
-          run: terraform validate -no-color
+          run: terraform validate -no-color --var-file="./environments/${{ matrix.environment }}.tfvars"
           # working-directory: terraform
 
         - name: Terraform Plan
           id: plan
           run: |
-            set -o pipefail; terraform plan --var-file="./environments/dev.tfvars" \
+            set -o pipefail; terraform plan --var-file="./environments/${{ matrix.environment }}.tfvars" \
             -var="github_token=${{ secrets.GITHUB_TOKEN}}" \
             -out="${{ matrix.environment }}.plan" \
           continue-on-error: false
