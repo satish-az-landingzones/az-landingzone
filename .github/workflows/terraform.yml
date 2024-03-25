@@ -1,7 +1,6 @@
 name: 'Terraform'
 on:
   push:
-    branches: [ "main", "terraform" ]
   pull_request:
 
 permissions:
@@ -13,7 +12,7 @@ jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    environment: dev
+    environment: Dev
     defaults:
       run:
         shell: bash
@@ -122,8 +121,8 @@ jobs:
         - name: Upload Artifact
           uses: actions/upload-artifact@v3.1.2
           with:
-            name: dev-plan
-            path: dev.plan
+            name: Dev-plan
+            path: Dev.plan
             retention-days: 30
 
 
@@ -181,7 +180,7 @@ jobs:
         - name: Terraform Apply
           id: apply
           run: |
-            terraform apply ""
+            terraform apply ${{ inputs.terraform_directory }}/${{ inputs.terraform_environment }}-${{ inputs.tfplan_name_suffix }}
           continue-on-error: false
           working-directory: terraform
 
