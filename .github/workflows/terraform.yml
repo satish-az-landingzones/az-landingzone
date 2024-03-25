@@ -129,7 +129,7 @@ jobs:
           uses: actions/upload-artifact@v3.1.2
           with:
             name: ${{ matrix.environment }}.plan
-            path: .
+            path: ${{ matrix.environment }}.plan
             retention-days: 30
 
 
@@ -182,7 +182,7 @@ jobs:
         - uses: actions/download-artifact@v3
           with:
             name: ${{ matrix.environment }}.plan
-            path: .
+            # path: ./
 
         - name: Terraform Apply
           id: apply
