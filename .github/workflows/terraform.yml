@@ -13,11 +13,10 @@ jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    environment: dev
+    environment: Dev
     defaults:
       run:
         shell: bash
-
     steps:
         - name: Checkout
           uses: actions/checkout@v2
@@ -46,7 +45,8 @@ jobs:
           run:
             terraform init -no-color
           env:
-            TFE_TOKEN: ${{ secrets.TFE_TOKEN }}
+            # TFE_TOKEN: ${{ secrets.TFE_TOKEN }}
+            TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
           working-directory: terraform
 
         - name: Terraform Validate
@@ -59,8 +59,8 @@ jobs:
           id: plan
           run: |
             set -o pipefail; terraform plan --var-file="./environments/dev.tfvars" \
-            -var="github_token=${{ secrets.GITHUB_TOKEN}}" \
-            -out="${{ matrix.environment }}.plan" \
+            -out="${{ matrix.environment }}.plan"
+
           continue-on-error: false
           working-directory: terraform
             
@@ -130,7 +130,7 @@ jobs:
   terraform-apply:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
-    environment: dev
+    environment: Dev
     defaults:
       run:
         shell: bash
