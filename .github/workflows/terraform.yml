@@ -20,7 +20,21 @@ jobs:
     steps:
         - name: Checkout
           uses: actions/checkout@v2
+        - name: Checkout
+          uses: actions/checkout@v2
 
+        - name: Azure Login
+          uses: azure/login@v1
+          with:
+            client-id: ${{ secrets.ARM_CLIENT_ID }}
+            tenant-id: ${{ secrets.ARM_TENANT_ID }}
+            subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+   
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v2
+          with:
+            terraform_version: '1.7.3'
+            cli_config_credentials_token: ${{ secrets.TF_API_TOKEN  }}
         - name: Azure Login
           uses: azure/login@v1
           with:
@@ -138,7 +152,21 @@ jobs:
     steps:
         - name: Checkout
           uses: actions/checkout@v2
+        - name: Checkout
+          uses: actions/checkout@v2
 
+        - name: Azure Login
+          uses: azure/login@v1
+          with:
+            client-id: ${{ secrets.ARM_CLIENT_ID }}
+            tenant-id: ${{ secrets.ARM_TENANT_ID }}
+            subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+   
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v2
+          with:
+            terraform_version: '1.7.3'
+            cli_config_credentials_token: ${{ secrets.TF_API_TOKEN  }}
         - name: Azure Login
           uses: azure/login@v1
           with:
@@ -177,6 +205,40 @@ jobs:
           with:
             name: ${{ inputs.terraform_environment }}-${{ inputs.tfplan_name_suffix }}
             path: ${{ inputs.terraform_directory }}
+        - name: Terraform version
+          id: version
+          shell: bash
+          run: terraform version
+          working-directory: terraform
+
+        - name: Terraform Init
+          shell: bash
+          run:
+            terraform init -no-color
+          env:
+            TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
+          working-directory: terraform
+
+        - name: Download Artifact
+          uses: actions/upload-artifact@v3.1.2
+          with:
+            name: ${{ matrix.environment }}-plan
+            path: terraform/${{ matrix.environment }}.plan
+            retention-days: 30
+
+        - uses: actions/download-artifact@v3
+          with:
+            name: ${{ inputs.terraform_environment }}-${{ inputs.tfplan_name_suffix }}
+            path: ${{ inputs.terraform_directory }}
+
+        - name: Terraform Apply
+          id: apply
+          run: |
+            terraform apply ""
+          continue-on-error: false
+          working-directory: terraform
+
+        
 
         - name: Terraform Apply
           id: apply
