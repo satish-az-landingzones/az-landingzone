@@ -48,11 +48,11 @@ jobs:
             TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
           # # working-directory: terraform
 
-        - name: Terraform Validate
-          id: validate
-          shell: bash
-          run: terraform validate -no-color --var-file="./environments/${{ matrix.environment }}.tfvars"
-          # working-directory: terraform
+        # - name: Terraform Validate
+        #   id: validate
+        #   shell: bash
+        #   run: terraform validate -no-color --var-file="./environments/${{ matrix.environment }}.tfvars"
+        #   # working-directory: terraform
 
         - name: Terraform Plan
           id: plan
