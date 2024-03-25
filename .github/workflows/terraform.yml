@@ -38,7 +38,7 @@ jobs:
           id: version
           shell: bash
           run: terraform version
-          working-directory: terraform
+          # working-directory: terraform
 
         - name: Terraform Init
           shell: bash
@@ -129,7 +129,8 @@ jobs:
   terraform-apply:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
-    environment: dev
+    depends-on: terraform-plan
+    environment: Dev
     defaults:
       run:
         shell: bash
@@ -152,10 +153,10 @@ jobs:
             cli_config_credentials_token: ${{ secrets.TF_API_TOKEN  }}
 
         - name: Terraform version
-          id: version
+          id: version-tf-apply
           shell: bash
           run: terraform version
-          working-directory: terraform
+          # working-directory: terraform
 
         - name: Terraform Init
           shell: bash
