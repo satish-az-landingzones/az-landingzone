@@ -38,7 +38,7 @@ jobs:
           id: version
           shell: bash
           run: terraform version
-          # working-directory: terraform
+          # # working-directory: terraform
 
         - name: Terraform Init
           shell: bash
@@ -46,13 +46,13 @@ jobs:
             terraform init -no-color
           env:
             TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
-          # working-directory: terraform
+          # # working-directory: terraform
 
         - name: Terraform Validate
           id: validate
           shell: bash
           run: terraform validate -no-color
-          working-directory: terraform
+          # working-directory: terraform
 
         - name: Terraform Plan
           id: plan
@@ -61,7 +61,7 @@ jobs:
             -var="github_token=${{ secrets.GITHUB_TOKEN}}" \
             -out="${{ matrix.environment }}.plan" \
           continue-on-error: false
-          working-directory: terraform
+          # working-directory: terraform
             
         - name: Terraform Plan Status
           if: steps.plan.outcome == 'failure'
@@ -156,7 +156,7 @@ jobs:
           id: version-tf-apply
           shell: bash
           run: terraform version
-          # working-directory: terraform
+          # # working-directory: terraform
 
         - name: Terraform Init
           shell: bash
@@ -164,7 +164,7 @@ jobs:
             terraform init -no-color
           env:
             TFE_TOKEN: ${{ secrets.TF_API_TOKEN }}
-          # working-directory: terraform
+          # # working-directory: terraform
 
         - uses: actions/download-artifact@v3
           with:
@@ -176,6 +176,6 @@ jobs:
           run: |
             terraform apply ${{ inputs.terraform_directory }}/${{ inputs.terraform_environment }}-${{ inputs.tfplan_name_suffix }}
           continue-on-error: false
-          working-directory: terraform
+          # working-directory: terraform
 
         
