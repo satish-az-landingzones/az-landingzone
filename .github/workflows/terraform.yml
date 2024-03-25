@@ -12,7 +12,13 @@ jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
-    environment: Dev
+    # environment: Dev
+    strategy:
+      max-parallel: 1
+      fail-fast: true
+      matrix:
+        environment:
+           - Dev
     defaults:
       run:
         shell: bash
