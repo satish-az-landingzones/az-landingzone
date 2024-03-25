@@ -65,7 +65,7 @@ jobs:
           id: plan
           run: |
             set -o pipefail; terraform plan --var-file="./environments/${{ matrix.environment }}.tfvars" \
-            -var="github_token=${{ secrets.GITHUB_TOKEN}}" \
+            -var="github_token=${{ secrets.READ_GITHUB_TOKEN}}" \
             -out="${{ matrix.environment }}.plan" \
           continue-on-error: false
           # working-directory: terraform
@@ -79,7 +79,7 @@ jobs:
           env:
             PLAN: "${{ steps.plan.outputs.stdout }}"
           with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+            github-token: ${{ secrets.READ_GITHUB_TOKEN }}
             script: |
               const { data: comments } = await github.rest.issues.listComments({
                 owner: context.repo.owner,
