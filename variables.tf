@@ -14,3 +14,22 @@ variable "default_location" {
   type    = string
   default = "eastus"
 }
+
+
+variable "subscriptions" {
+  type = list(object({
+    subscription_alias_name          = string
+    subscription_display_name        = string
+    subscription_workload            = string
+    subscription_management_group_id = string
+    subscription_billing_scope       = string
+  }))
+}
+
+variable "spoke_subscription" {
+  type = string
+}
+
+variable "hub_subscription" {
+  type = string
+}

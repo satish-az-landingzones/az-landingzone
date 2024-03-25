@@ -1,26 +1,3 @@
-# Configure Terraform to set the required AzureRM provider
-# version and features{} block.
-
-terraform {
-  cloud {
-    organization = "tf-az-landingzone"
-
-    workspaces {
-      name = "tf-workspace-az-lz"
-    }
-  }
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = ">= 3.74.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  features {}
-}
-
 # Get the current client configuration from the AzureRM provider.
 # This is used to populate the root_parent_id variable with the
 # current Tenant ID used as the ID for the "Tenant Root Group"
@@ -54,7 +31,7 @@ module "enterprise_scale" {
     "app1" = {
       display_name               = "app1"
       parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = ["09eb89bf-2bc2-47fd-a1c4-1eb8124e95a0"]
+      subscription_ids           = []
       archetype_config = {
         archetype_id   = "customer_online"
         parameters     = {}
