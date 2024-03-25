@@ -234,17 +234,9 @@ jobs:
         - name: Terraform Apply
           id: apply
           run: |
-            terraform apply ""
+            terraform apply  ${{ inputs.terraform_directory }}/${{ inputs.terraform_environment }}-${{ inputs.tfplan_name_suffix }}
           continue-on-error: false
           working-directory: terraform
 
-        
-
-        - name: Terraform Apply
-          id: apply
-          run: |
-            terraform apply ""
-          continue-on-error: false
-          working-directory: terraform
 
         
