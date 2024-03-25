@@ -11,7 +11,7 @@ resource "azuread_application_federated_identity_credential" "hub" {
   description    = "GitHub Deployments for Hub using Terraform"
   audiences      = ["api://AzureADTokenExchange"]
   issuer         = "https://token.actions.githubusercontent.com"
-  subject        = "repo:satish-az-landingzones/az-landingzone:environment:Dev"
+  subject        = "repo:satish-az-landingzones/satish-az-lz-hub:environment:Production"
 }
 
 #Create Service Principal
