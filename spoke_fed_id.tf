@@ -12,7 +12,7 @@ resource "azuread_application_federated_identity_credential" "spoke" {
   description    = "GitHub Deployments for Spoke using Terraform"
   audiences      = ["api://AzureADTokenExchange"]
   issuer         = "https://token.actions.githubusercontent.com"
-  subject        = "repo:satish-az-landingzones/az-landingzone:environment:Dev"
+  subject        = "repo:satish-az-landingzones/satish-az-lz-spoke:environment:Production"
 }
 
 #Create Service Principal
